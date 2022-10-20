@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import YouTube from 'react-youtube';
 import Playlist from '../datajson/playlist.json'
 
-import { Container, Row, Col, ListGroup, Nav } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 
 export class Test extends Component {
     constructor() {
