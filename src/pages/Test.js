@@ -28,10 +28,12 @@ export class Test extends Component {
     }
 
     ConvertTime(Time) {
-        let hms = Time;
-        let separate = hms.split(':');
-        let seconds = (+separate[0]) * 60 * 60 + (+separate[1]) * 60 + (+separate[2]);
-        return seconds
+        if (Time) {
+            let hms = Time;
+            let separate = hms.split(':');
+            let seconds = (+separate[0]) * 60 * 60 + (+separate[1]) * 60 + (+separate[2]);
+            return seconds
+        }
     }
 
     PlayMusic(Key) {
@@ -75,6 +77,7 @@ export class Test extends Component {
     }
 
     PlayQueue(Idx) {
+        console.log(Idx)
         let MusicStart = this.ConvertTime(this.state.PlaylistQueue[Idx].MusicTimeStart)
         let MusicEnd = this.ConvertTime(this.state.PlaylistQueue[Idx].MusicTimeEnd)
 
@@ -147,7 +150,7 @@ export class Test extends Component {
                                         <div key={idx}>
                                             <Row>
                                                 <Col md="10">
-                                                    {idx}{data.Band} - {data.MusicName}
+                                                    {data.Band} - {data.MusicName}
                                                 </Col>
                                                 <Col md="2">
                                                     <a onClick={() => this.DeleteQueue(idx)}>-</a>
