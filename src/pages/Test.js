@@ -57,7 +57,7 @@ export class Test extends Component {
     }
 
     render() {
-        console.log(this.state.Play)
+        // console.log(this.state.Play)
         return (
             <div>
                 <YouTube videoId={this.state.Play.VideoId} opts={this.state.Play.Options} />
