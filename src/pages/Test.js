@@ -33,7 +33,8 @@ export class Test extends Component {
             let separate = hms.split(':');
             let seconds = (+separate[0]) * 60 * 60 + (+separate[1]) * 60 + (+separate[2]);
             return seconds
-        }
+        } else
+            return null
     }
 
     PlayMusic(Key) {
@@ -50,8 +51,7 @@ export class Test extends Component {
                         start: MusicStart,
                         end: MusicEnd,
                         autoplay: 1,
-                        controls: 1,
-                        loop: 1
+                        controls: 1
                     }
                 }
             }
@@ -75,12 +75,15 @@ export class Test extends Component {
         this.setState({
             PlaylistQueue: newdata
         })
+
     }
 
     PlayQueue(Idx) {
-        console.log(Idx)
-        let MusicStart = this.ConvertTime(this.state.PlaylistQueue[Idx].MusicTimeStart)
-        let MusicEnd = this.ConvertTime(this.state.PlaylistQueue[Idx].MusicTimeEnd)
+
+        let MusicStart = null
+        let MusicEnd = null
+        MusicStart = this.ConvertTime(this.state.PlaylistQueue[Idx].MusicTimeStart)
+        MusicEnd = this.ConvertTime(this.state.PlaylistQueue[Idx].MusicTimeEnd)
 
         this.setState({
             Player: {
@@ -92,14 +95,22 @@ export class Test extends Component {
                         start: MusicStart,
                         end: MusicEnd,
                         autoplay: 1,
-                        controls: 1,
-                        loop: 1
+                        controls: 1
                     }
                 }
             }
         })
+        setTimeout(() => {
+            console.log('onEndFx')
+            this.DeleteQueue(Idx)
+        }, MusicEnd - MusicStart);
 
-        this.DeleteQueue(Idx)
+    }
+
+    _onReady(event) {
+        // access to player in all event handlers via event.target
+        console.log(event)
+        event.target.playVideo();
     }
 
     render() {
@@ -108,28 +119,35 @@ export class Test extends Component {
         })
         return (
             <Container>
-                <YouTube videoId={this.state.Player.VideoId} opts={this.state.Player.Options} onEnd={() => this.PlayQueue(0)} />
+                <YouTube
+                    videoId={this.state.Player.VideoId}
+                    opts={this.state.Player.Options}
+                    onEnd={() => this.PlayQueue(0)}
+                    // onEnd={this._onEnd}
+                    onReady={this._onReady}
+                    onPlay={this._onPlay}
+                    onPause={this._onPause}
+                />
                 <input
                     placeholder='Search'
                     value={this.state.SearchValue}
                     onChange={e => this.Search(e.target.value)}
                     type='text'
                 />
-                <p>{this.state.SearchValue}</p>
                 <Container>
                     <Row>
                         <Col>
                             <p>Playlist</p>
-                            <div className="overflow-scroll" style={{ height: 300 }}>
+                            <div className="overflow-scroll" style={{ height: 500 }}>
                                 {
                                     newdata.map((data, idx) =>
                                         <div key={data.Key}>
                                             <Row>
-                                                <Col md="10">
-                                                    <a onClick={() => this.PlayMusic(data.Key)}>{data.Band} - {data.MusicName}</a>
+                                                <Col md="10" xs="8">
+                                                    <p onClick={() => this.PlayMusic(data.Key)}>{data.Band} - {data.MusicName}</p>
                                                 </Col>
-                                                <Col md="2">
-                                                    <a onClick={() => this.AddQueue(data)}>+</a>
+                                                <Col md="2" xs="2">
+                                                    <p onClick={() => this.AddQueue(data)}>+</p>
                                                 </Col>
                                             </Row>
                                         </div>
@@ -143,19 +161,19 @@ export class Test extends Component {
                                     <p>Queue</p>
                                 </Col>
                                 <Col md="2">
-                                    <a onClick={() => this.PlayQueue(0)}>PlayQueue</a>
+                                    <p onClick={() => this.PlayQueue(0)}>PlayQueue</p>
                                 </Col>
                             </Row>
-                            <div className="overflow-scroll" style={{ height: 300 }}>
+                            <div className="overflow-scroll" style={{ height: 500 }}>
                                 {
                                     this.state.PlaylistQueue.map((data, idx) =>
                                         <div key={idx}>
-                                            <Row>
-                                                <Col md="10">
+                                            <Row >
+                                                <Col md="10" xs="8">
                                                     {data.Band} - {data.MusicName}
                                                 </Col>
-                                                <Col md="2">
-                                                    <a onClick={() => this.DeleteQueue(idx)}>-</a>
+                                                <Col md="2" xs="2">
+                                                    <p onClick={() => this.DeleteQueue(idx)}>x</p>
                                                 </Col>
                                             </Row>
                                         </div>
