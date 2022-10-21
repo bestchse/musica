@@ -140,11 +140,13 @@ export class Test extends Component {
         })
         return (
             <Container>
-                <YouTube
-                    videoId={this.state.Player.VideoId}
-                    opts={this.state.Player.Options}
-                    onEnd={() => this.PlayQueue(0)}
-                />
+                <Row col md="12" xs="12">
+                    <YouTube
+                        videoId={this.state.Player.VideoId}
+                        opts={this.state.Player.Options}
+                        onEnd={() => this.PlayQueue(0)}
+                    />
+                </Row>
                 <input
                     placeholder='Search'
                     value={this.state.SearchValue}
