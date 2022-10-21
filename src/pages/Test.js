@@ -17,7 +17,8 @@ export class Test extends Component {
                     playerVars: {
                         start: null,
                         autoplay: 1,
-                        controls: 1
+                        controls: 1,
+                        origin:'http://localhost:3000'
                     }
                 }
             },
@@ -51,7 +52,8 @@ export class Test extends Component {
                         start: MusicStart,
                         end: MusicEnd,
                         autoplay: 1,
-                        controls: 1
+                        controls: 1,
+                        origin:'http://localhost:3000'
                     }
                 }
             }
@@ -96,7 +98,8 @@ export class Test extends Component {
                     playerVars: {
                         start: null,
                         autoplay: 1,
-                        controls: 1
+                        controls: 1,
+                        origin:'http://localhost:3000'
                     }
                 }
             }
@@ -108,17 +111,20 @@ export class Test extends Component {
 
     }
 
-    PlayAll() {
+    AddAllQueue() {
         this.setState({
             PlaylistQueue: this.state.Playlist
         })
-        setTimeout(() => {
-            if (this.state.PlaylistQueue.length !== 0)
-                this.PlayQueue(0)
-        }, 1000);
     }
 
-    PlayQueue(Idx) {
+    ClearAllQueue() {
+        this.setState({
+            PlaylistQueue: []
+        })
+    }
+
+    PlayQueue(Idx,event) {
+        console.log(event)
         let MusicStart = null
         let MusicEnd = null
         MusicStart = this.ConvertTime(this.state.PlaylistQueue[Idx].MusicTimeStart)
@@ -133,7 +139,8 @@ export class Test extends Component {
                         start: MusicStart,
                         end: MusicEnd,
                         autoplay: 1,
-                        controls: 1
+                        controls: 1,
+                        origin:'http://localhost:3000'
                     }
                 }
             }
@@ -150,7 +157,7 @@ export class Test extends Component {
         })
         return (
             <Container>
-                <Row col md="12" xs="12">
+                <Row md="12" xs="12">
                     <YouTube
                         videoId={this.state.Player.VideoId}
                         opts={this.state.Player.Options}
@@ -164,6 +171,17 @@ export class Test extends Component {
                     type='text'
                 />
                 <Container>
+                    <Row>
+                        <Col md="4" xs="4">
+                            <p onClick={() => this.PlayQueue(0)}>PlayQueue</p>
+                        </Col>
+                        <Col md="4" xs="4">
+                            <p onClick={() => this.AddAllQueue()}>AddAllQueue</p>
+                        </Col>
+                        <Col md="4" xs="4">
+                            <p onClick={() => this.ClearAllQueue()}>ClearAllQueue</p>
+                        </Col>
+                    </Row>
                     <Row>
                         <Col md="6" xs="6">
                             <p>Playlist</p>
@@ -186,15 +204,7 @@ export class Test extends Component {
                         </Col>
                         <Col md="6" xs="6">
                             <Row>
-                                <Col md="6" xs="6">
-                                    <p onClick={() => this.PlayQueue(0)}>PlayQueue</p>
-                                </Col>
-                                <Col md="6" xs="6">
-                                    <p onClick={() => this.PlayAll()}>PlayAll</p>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md="12" xs="2">
+                                <Col md="12" xs="12">
                                     <p>Queue</p>
                                 </Col>
                             </Row>
