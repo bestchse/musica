@@ -50,7 +50,8 @@ export class Test extends Component {
                         start: MusicStart,
                         end: MusicEnd,
                         autoplay: 1,
-                        controls: 1
+                        controls: 1,
+                        loop: 1
                     }
                 }
             }
@@ -91,7 +92,8 @@ export class Test extends Component {
                         start: MusicStart,
                         end: MusicEnd,
                         autoplay: 1,
-                        controls: 1
+                        controls: 1,
+                        loop: 1
                     }
                 }
             }
