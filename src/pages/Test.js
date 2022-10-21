@@ -153,7 +153,7 @@ export class Test extends Component {
                 />
                 <Container>
                     <Row>
-                        <Col>
+                        <Col md="6" xs="6">
                             <p>Playlist</p>
                             <div className="overflow-scroll" style={{ height: 500 }}>
                                 {
@@ -172,7 +172,7 @@ export class Test extends Component {
                                 }
                             </div>
                         </Col>
-                        <Col>
+                        <Col md="6" xs="6">
                             <Row>
                                 <Col md="10" xs="8">
                                     <p>Queue</p>
