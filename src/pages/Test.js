@@ -108,6 +108,16 @@ export class Test extends Component {
 
     }
 
+    PlayAll() {
+        this.setState({
+            PlaylistQueue: this.state.Playlist
+        })
+        setTimeout(() => {
+            if (this.state.PlaylistQueue.length !== 0)
+                this.PlayQueue(0)
+        }, 1000);
+    }
+
     PlayQueue(Idx) {
         let MusicStart = null
         let MusicEnd = null
@@ -176,11 +186,16 @@ export class Test extends Component {
                         </Col>
                         <Col md="6" xs="6">
                             <Row>
-                                <Col md="10" xs="8">
-                                    <p>Queue</p>
+                                <Col md="6" xs="6">
+                                    <p onClick={() => this.PlayQueue(0)}>PlayQueue</p>
                                 </Col>
-                                <Col md="2" xs="4">
-                                    <p onClick={() => this.PlayQueue(0)}>Play</p>
+                                <Col md="6" xs="6">
+                                    <p onClick={() => this.PlayAll()}>PlayAll</p>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col md="12" xs="2">
+                                    <p>Queue</p>
                                 </Col>
                             </Row>
                             <div className="overflow-scroll" style={{ height: 500 }}>
