@@ -13,7 +13,7 @@ export class Test extends Component {
                 VideoId: 'HeraLYDENSI',
                 Options: {
                     height: '260',
-                    width: '490',
+                    width: '100%',
                     playerVars: {
                         start: null,
                         autoplay: 1,
@@ -46,7 +46,7 @@ export class Test extends Component {
                 VideoId: this.state.Playlist[Key - 1].VideoId,
                 Options: {
                     height: '260',
-                    width: '490',
+                    width: '100%',
                     playerVars: {
                         start: MusicStart,
                         end: MusicEnd,
@@ -92,7 +92,7 @@ export class Test extends Component {
                 VideoId: null,
                 Options: {
                     height: '260',
-                    width: '490',
+                    width: '100%',
                     playerVars: {
                         start: null,
                         autoplay: 1,
@@ -118,7 +118,7 @@ export class Test extends Component {
                 VideoId: this.state.PlaylistQueue[0].VideoId,
                 Options: {
                     height: '260',
-                    width: '490',
+                    width: '100%',
                     playerVars: {
                         start: MusicStart,
                         end: MusicEnd,
@@ -165,7 +165,7 @@ export class Test extends Component {
                                                 <Col md="10" xs="8">
                                                     <p onClick={() => this.PlayMusic(data.Key)}>{data.Band} - {data.MusicName}</p>
                                                 </Col>
-                                                <Col md="2" xs="2">
+                                                <Col md="2" xs="4">
                                                     <p onClick={() => this.AddQueue(data)}>+</p>
                                                 </Col>
                                             </Row>
@@ -179,8 +179,8 @@ export class Test extends Component {
                                 <Col md="10" xs="8">
                                     <p>Queue</p>
                                 </Col>
-                                <Col md="2" xs="2">
-                                    <p onClick={() => this.PlayQueue(0)}>PlayQueue</p>
+                                <Col md="2" xs="4">
+                                    <p onClick={() => this.PlayQueue(0)}>Play</p>
                                 </Col>
                             </Row>
                             <div className="overflow-scroll" style={{ height: 500 }}>
@@ -191,7 +191,7 @@ export class Test extends Component {
                                                 <Col md="10" xs="8">
                                                     {data.Band} - {data.MusicName}
                                                 </Col>
-                                                <Col md="2" xs="2">
+                                                <Col md="2" xs="4">
                                                     <p onClick={() => this.DeleteQueue(idx)}>x</p>
                                                 </Col>
                                             </Row>
