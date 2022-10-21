@@ -12,8 +12,8 @@ export class Test extends Component {
             Player: {
                 VideoId: 'HeraLYDENSI',
                 Options: {
-                    height: '200',
-                    width: '400',
+                    height: '260',
+                    width: '490',
                     playerVars: {
                         start: null,
                         autoplay: 1,
@@ -45,8 +45,8 @@ export class Test extends Component {
             Player: {
                 VideoId: this.state.Playlist[Key - 1].VideoId,
                 Options: {
-                    height: '200',
-                    width: '400',
+                    height: '260',
+                    width: '490',
                     playerVars: {
                         start: MusicStart,
                         end: MusicEnd,
@@ -91,8 +91,8 @@ export class Test extends Component {
             Player: {
                 VideoId: null,
                 Options: {
-                    height: '200',
-                    width: '400',
+                    height: '260',
+                    width: '490',
                     playerVars: {
                         start: null,
                         autoplay: 1,
@@ -117,8 +117,8 @@ export class Test extends Component {
             Player: {
                 VideoId: this.state.PlaylistQueue[0].VideoId,
                 Options: {
-                    height: '200',
-                    width: '400',
+                    height: '260',
+                    width: '490',
                     playerVars: {
                         start: MusicStart,
                         end: MusicEnd,
