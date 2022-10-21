@@ -78,13 +78,41 @@ export class Test extends Component {
 
     }
 
-    PlayQueue(Idx) {
+    NextQueue(id) {
+        let newdata = this.state.PlaylistQueue.filter((data, idx) => !(id === idx));
+        this.setState({
+            PlaylistQueue: newdata
+        })
+        this.setZero()
+    }
 
+    setZero = () => {
+        this.setState({
+            Player: {
+                VideoId: null,
+                Options: {
+                    height: '200',
+                    width: '400',
+                    playerVars: {
+                        start: null,
+                        autoplay: 1,
+                        controls: 1
+                    }
+                }
+            }
+        })
+        setTimeout(() => {
+            if (this.state.PlaylistQueue.length !== 0)
+                this.PlayQueue(0)
+        }, 1000);
+
+    }
+
+    PlayQueue(Idx) {
         let MusicStart = null
         let MusicEnd = null
         MusicStart = this.ConvertTime(this.state.PlaylistQueue[Idx].MusicTimeStart)
         MusicEnd = this.ConvertTime(this.state.PlaylistQueue[Idx].MusicTimeEnd)
-
         this.setState({
             Player: {
                 VideoId: this.state.PlaylistQueue[0].VideoId,
@@ -101,16 +129,9 @@ export class Test extends Component {
             }
         })
         setTimeout(() => {
-            console.log('onEndFx')
-            this.DeleteQueue(Idx)
-        }, MusicEnd - MusicStart);
+            this.NextQueue(Idx)
+        }, (MusicEnd - MusicStart) * 1000);
 
-    }
-
-    _onReady(event) {
-        // access to player in all event handlers via event.target
-        console.log(event)
-        event.target.playVideo();
     }
 
     render() {
@@ -123,10 +144,6 @@ export class Test extends Component {
                     videoId={this.state.Player.VideoId}
                     opts={this.state.Player.Options}
                     onEnd={() => this.PlayQueue(0)}
-                    // onEnd={this._onEnd}
-                    onReady={this._onReady}
-                    onPlay={this._onPlay}
-                    onPause={this._onPause}
                 />
                 <input
                     placeholder='Search'
@@ -157,10 +174,10 @@ export class Test extends Component {
                         </Col>
                         <Col>
                             <Row>
-                                <Col md="10">
+                                <Col md="10" xs="8">
                                     <p>Queue</p>
                                 </Col>
-                                <Col md="2">
+                                <Col md="2" xs="2">
                                     <p onClick={() => this.PlayQueue(0)}>PlayQueue</p>
                                 </Col>
                             </Row>
