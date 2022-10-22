@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import YouTube from "react-youtube";
 import Playlist from "../datajson/playlist.json";
 
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button, Form, Card } from "react-bootstrap";
 
 export class Um extends Component {
     constructor() {
@@ -146,7 +146,7 @@ export class Um extends Component {
         })
         return (
             <Container>
-                <Row md="12" xs="12">
+                <Row md="12" xs="12" style={{ padding: 10 }}>
                     <YouTube
                         videoId={this.state.YoutubePlayer.VideoId}
                         opts={this.state.YoutubePlayer.Options}
@@ -158,64 +158,74 @@ export class Um extends Component {
                     // onPause={this.onPause()}
                     />
                 </Row>
-                <input
-                    placeholder="Search"
-                    value={this.state.Search}
-                    onChange={(e) => this.setState({ Search: e.target.value })}
-                    type="text"
-                />
+                <Row md="12" xs="12" style={{ padding: 10, flex: 1, justifyContent: 'center' }}>
+                    <Form.Control
+                        placeholder="Search"
+                        value={this.state.Search}
+                        onChange={(e) => this.setState({ Search: e.target.value })}
+                        type="text"
+                        style={{ textAlign: 'center', width: '50%' }}
+                    />
+                </Row>
                 <Container>
                     <Row>
                         <Col md="4" xs="4">
-                            <p onClick={() => this.PlayQueue()}>PlayQueue</p>
+                            <Button variant="outline-secondary" size="sm" onClick={() => this.PlayQueue()}>PlayQueue</Button>
                         </Col>
                         <Col md="4" xs="4">
-                            <p onClick={() => this.AddAllQueue()}>AddAllQueue</p>
+                            <Button variant="outline-secondary" size="sm" onClick={() => this.AddAllQueue()}>AddAllQueue</Button>
                         </Col>
                         <Col md="4" xs="4">
-                            <p onClick={() => this.ClearAllQueue()}>ClearAllQueue</p>
+                            <Button variant="outline-secondary" size="sm" onClick={() => this.ClearAllQueue()}>ClearAllQueue</Button>
                         </Col>
                     </Row>
-                    <Row>
+
+                    <Row style={{ padding: 10 }}>
                         <Col md="6" xs="6">
-                            <p>Playlist</p>
-                            <div className="overflow-scroll" style={{ height: 500 }}>
-                                {SearchData.map((data, idx) => (
-                                    <div key={data.Key}>
-                                        <Row>
-                                            <Col md="10" xs="8">
-                                                <p onClick={() => this.PlayMusic(data)}>
-                                                    {data.Band} - {data.MusicName}
-                                                </p>
-                                            </Col>
-                                            <Col md="2" xs="4">
-                                                <p onClick={() => this.AddQueue(data)}>+</p>
-                                            </Col>
-                                        </Row>
+                            <Card className="text-center">
+                                <Card.Header>Playlist : {this.state.Playlist.length}</Card.Header>
+                                <Card.Body>
+                                    <div className="overflow-scroll" style={{ height: 400 }}>
+                                        {SearchData.map((data, idx) => (
+                                            <div key={data.Key}>
+                                                <Row>
+                                                    <Col md="10" xs="8">
+                                                        <p onClick={() => this.PlayMusic(data)}>
+                                                            {data.Band} - {data.MusicName}
+                                                        </p>
+                                                    </Col>
+                                                    <Col md="2" xs="4">
+                                                        <p onClick={() => this.AddQueue(data)}>+</p>
+                                                    </Col>
+                                                </Row>
+                                            </div>
+                                        ))}
                                     </div>
-                                ))}
-                            </div>
+                                </Card.Body>
+
+                            </Card>
                         </Col>
                         <Col md="6" xs="6">
-                            <Row>
-                                <Col md="12" xs="12">
-                                    <p>Queue</p>
-                                </Col>
-                            </Row>
-                            <div className="overflow-scroll" style={{ height: 500 }}>
-                                {this.state.QueuePlaylist.map((data, idx) => (
-                                    <div key={idx}>
-                                        <Row>
-                                            <Col md="10" xs="8">
-                                                {data.Band} - {data.MusicName}
-                                            </Col>
-                                            <Col md="2" xs="4">
-                                                <p onClick={() => this.DeleteQueue(data, idx)}>x</p>
-                                            </Col>
-                                        </Row>
+                            <Card className="text-center">
+                                <Card.Header>Queue : {this.state.QueuePlaylist.length}</Card.Header>
+                                <Card.Body>
+                                    <div className="overflow-scroll" style={{ height: 400 }}>
+                                        {this.state.QueuePlaylist.map((data, idx) => (
+                                            <div key={idx}>
+                                                <Row>
+                                                    <Col md="10" xs="8">
+                                                        {data.Band} - {data.MusicName}
+                                                    </Col>
+                                                    <Col md="2" xs="4">
+                                                        <p onClick={() => this.DeleteQueue(data, idx)}>x</p>
+                                                    </Col>
+                                                </Row>
+                                            </div>
+                                        ))}
                                     </div>
-                                ))}
-                            </div>
+                                </Card.Body>
+
+                            </Card>
                         </Col>
                     </Row>
                 </Container>
