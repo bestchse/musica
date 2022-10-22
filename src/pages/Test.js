@@ -24,7 +24,6 @@ export class Test extends Component {
             },
             SearchValue: "",
             PlaylistQueue: [],
-            NextQueue: false
         };
     }
 
@@ -60,7 +59,7 @@ export class Test extends Component {
         })
     }
 
-    Search = (event) => {
+    Search(event) {
         this.setState({
             SearchValue: event
         })
@@ -86,6 +85,11 @@ export class Test extends Component {
             PlaylistQueue: newdata
         })
         this.setZero()
+        // setTimeout(() => {
+        //     console.log('setZero')
+        //     if (this.state.PlaylistQueue.length !== 0)
+        //         this.PlayQueue(0)
+        // }, 2000);
     }
 
     setZero = () => {
@@ -97,7 +101,7 @@ export class Test extends Component {
                     width: '100%',
                     playerVars: {
                         start: null,
-                        autoplay: 1,
+                        autoplay: 0,
                         controls: 1,
                         origin:'http://localhost:3000'
                     }
@@ -105,9 +109,10 @@ export class Test extends Component {
             }
         })
         setTimeout(() => {
+            console.log('setZero')
             if (this.state.PlaylistQueue.length !== 0)
                 this.PlayQueue(0)
-        }, 1000);
+        }, 2000);
 
     }
 
@@ -123,15 +128,19 @@ export class Test extends Component {
         })
     }
 
-    PlayQueue(Idx,event) {
-        console.log(event)
+    PlayQueue(Idx) {
+        console.log('PlayQueue')
         let MusicStart = null
         let MusicEnd = null
-        MusicStart = this.ConvertTime(this.state.PlaylistQueue[Idx].MusicTimeStart)
-        MusicEnd = this.ConvertTime(this.state.PlaylistQueue[Idx].MusicTimeEnd)
+        let VideoId = null
+        if(this.state.PlaylistQueue.length !== 0){
+            MusicStart = this.ConvertTime(this.state.PlaylistQueue[Idx].MusicTimeStart)
+            MusicEnd = this.ConvertTime(this.state.PlaylistQueue[Idx].MusicTimeEnd)
+            VideoId = this.state.PlaylistQueue[Idx].VideoId
+        }
         this.setState({
             Player: {
-                VideoId: this.state.PlaylistQueue[0].VideoId,
+                VideoId: VideoId,
                 Options: {
                     height: '260',
                     width: '100%',
@@ -146,9 +155,22 @@ export class Test extends Component {
             }
         })
         setTimeout(() => {
+            console.log('NextQ')
             this.NextQueue(Idx)
         }, (MusicEnd - MusicStart) * 1000);
 
+    }
+    onReady(){
+        console.log('onReady')
+    }
+    onEnd(){
+        console.log('onEnd')
+    }
+    onStateChange(){
+        console.log('onStateChange')
+    }
+    onPlay(){
+        console.log('onPlay')
     }
 
     render() {
@@ -161,7 +183,12 @@ export class Test extends Component {
                     <YouTube
                         videoId={this.state.Player.VideoId}
                         opts={this.state.Player.Options}
-                        onEnd={() => this.PlayQueue(0)}
+                        // onEnd={()=>this.PlayQueue(0)}
+                        onEnd={()=>this.onEnd()}
+                        onReady={()=>this.onReady()}
+                        // onPlay={()=>this.onPlay()}
+                        onPlay={()=>this.PlayQueue(0)}
+                        onStateChange={()=>this.onStateChange()}
                     />
                 </Row>
                 <input

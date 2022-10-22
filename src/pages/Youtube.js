@@ -22,6 +22,7 @@ export class Youtube extends Component {
 
     _onReady(event) {
         // access to player in all event handlers via event.target
+        console.log('_onReady')
         event.target.pauseVideo();
     }
     onPlayerReady(event) {
