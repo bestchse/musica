@@ -25,24 +25,24 @@ export class Um extends Component {
         }
     }
     onEnd() {
-        console.log('onEnd')
+        // console.log('onEnd')
     }
     onReady() {
-        console.log('onReady')
+        // console.log('onReady')
     }
     onPlay() {
-        console.log('onPlay')
+        // console.log('onPlay')
     }
     onStateChange() {
-        console.log('onStateChange')
+        // console.log('onStateChange')
     }
     onPause() {
-        console.log('onPause')
+        // console.log('onPause')
     }
 
     PlayMusic(data) {
-        console.log('PlayMusic')
-        console.log(data)
+        // console.log('PlayMusic')
+        // console.log(data)
         let MusicStart = this.ConvertTime(data.MusicTimeStart)
         let MusicEnd = this.ConvertTime(data.MusicTimeEnd)
         let VideoId = data.VideoId
@@ -63,53 +63,69 @@ export class Um extends Component {
         })
     }
     ClearQueue() {
-        console.log('ClearQueue')
+        // console.log('ClearQueue')
         this.setState({
-            QueuePlaylist: this.state.QueuePlaylist.slice(1)
+            QueuePlaylist: this.state.QueuePlaylist.slice(1),
+            YoutubePlayer: {
+                VideoId: null,
+                Options: {
+                    height: '260',
+                    width: '100%',
+                    playerVars: {
+                        start: null,
+                        end: null,
+                        autoplay: 1,
+                        origin: 'http://localhost:3000'
+                    }
+                }
+            }
         })
         setTimeout(() => {
             this.PlayQueue()
         }, 2000);
     }
     NextQueue() {
-        console.log('NextQueue')
-        let MusicStart = this.ConvertTime(this.state.QueuePlaylist[0].MusicTimeStart)
-        let MusicEnd = this.ConvertTime(this.state.QueuePlaylist[0].MusicTimeEnd)
-        setTimeout(() => {
+        // console.log('NextQueue')
+        if (this.state.QueuePlaylist.length !== 0) {
+            // let MusicStart = this.ConvertTime(this.state.QueuePlaylist[0].MusicTimeStart)
+            // let MusicEnd = this.ConvertTime(this.state.QueuePlaylist[0].MusicTimeEnd)
+            // setTimeout(() => {
             this.ClearQueue()
-        }, (MusicEnd - MusicStart) * 1000);
+            // }, (MusicEnd - MusicStart) * 1000);
+        }
+
     }
     PlayQueue() {
-        console.log('PlayQueue')
-        console.log(this.state.QueuePlaylist)
+        // console.log('PlayQueue')
+        // console.log(this.state.QueuePlaylist)
         this.PlayMusic(this.state.QueuePlaylist[0])
-        if (this.state.QueuePlaylist.length != 1) {
-            this.NextQueue()
-        } else {
-            console.log('LastQueue')
-        }
+        // if (this.state.QueuePlaylist.length != 1) {
+        //     this.NextQueue()
+        // } else {
+        //     // console.log('LastQueue')
+        // }
     }
     AddQueue(data) {
-        console.log('AddQueue')
+        // console.log('AddQueue')
         this.setState({
             QueuePlaylist: [...this.state.QueuePlaylist, data]
         })
     }
     DeleteQueue(data, id) {
-        console.log('DeleteQueue')
+        // console.log('DeleteQueue')
         let newdata = this.state.QueuePlaylist.filter((data, idx) => !(id === idx));
         this.setState({
             QueuePlaylist: newdata
         })
     }
     AddAllQueue() {
-        console.log('AddAllQueue')
+        // console.log('AddAllQueue')
         this.setState({
             QueuePlaylist: this.state.Playlist
         })
     }
     ClearAllQueue() {
-        console.log('ClearAllQueue')
+        // console.log('ClearAllQueue')
         this.setState({
             QueuePlaylist: []
         })
@@ -134,6 +150,7 @@ export class Um extends Component {
                     <YouTube
                         videoId={this.state.YoutubePlayer.VideoId}
                         opts={this.state.YoutubePlayer.Options}
+                        onEnd={() => this.NextQueue()}
                     // onEnd={this.onEnd()}
                     // onReady={this.onReady()}
                     // onPlay={this.onPlay()}
