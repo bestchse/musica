@@ -4,6 +4,8 @@ import Playlist from "../datajson/playlist.json";
 
 import { Container, Row, Col, Button, Form, Card } from "react-bootstrap";
 
+import ScaleText from "react-scale-text";
+
 export class Um extends Component {
     constructor() {
         super();
@@ -190,9 +192,13 @@ export class Um extends Component {
                                             <div key={data.Key}>
                                                 <Row>
                                                     <Col md="10" xs="8">
-                                                        <p onClick={() => this.PlayMusic(data)}>
-                                                            {data.Band} - {data.MusicName}
-                                                        </p>
+                                                        <div className="parent">
+                                                            <ScaleText>
+                                                                <p className="child">
+                                                                    {data.Band} - {data.MusicName}
+                                                                </p>
+                                                            </ScaleText>
+                                                        </div>
                                                     </Col>
                                                     <Col md="2" xs="4">
                                                         <p onClick={() => this.AddQueue(data)}>+</p>
@@ -214,7 +220,13 @@ export class Um extends Component {
                                             <div key={idx}>
                                                 <Row>
                                                     <Col md="10" xs="8">
-                                                        {data.Band} - {data.MusicName}
+                                                        <div className="parent">
+                                                            <ScaleText>
+                                                                <p className="child">
+                                                                    {data.Band} - {data.MusicName}
+                                                                </p>
+                                                            </ScaleText>
+                                                        </div>
                                                     </Col>
                                                     <Col md="2" xs="4">
                                                         <p onClick={() => this.DeleteQueue(data, idx)}>x</p>
