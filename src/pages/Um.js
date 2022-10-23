@@ -64,10 +64,15 @@ export class Um extends Component {
     }
     ClearQueue(id) {
         // console.log('ClearQueue')
-        // let newdata = this.state.QueuePlaylist.filter((data, idx) => !(id === idx));
+        let newdata = null
+        if (id === undefined) {
+            newdata = this.state.QueuePlaylist.slice(1)
+        } else {
+            newdata = this.state.QueuePlaylist.filter((data, idx) => !(id === idx));
+        }
         this.setState({
             // QueuePlaylist: this.state.QueuePlaylist.slice(1),
-            // QueuePlaylist: newdata,
+            QueuePlaylist: newdata,
             YoutubePlayer: {
                 VideoId: null,
                 Options: {
@@ -86,13 +91,13 @@ export class Um extends Component {
             this.PlayQueue()
         }, 1000);
     }
-    NextQueue() {
+    NextQueue(id) {
         // console.log('NextQueue')
         if (this.state.QueuePlaylist.length !== 0) {
             // let MusicStart = this.ConvertTime(this.state.QueuePlaylist[0].MusicTimeStart)
             // let MusicEnd = this.ConvertTime(this.state.QueuePlaylist[0].MusicTimeEnd)
             // setTimeout(() => {
-            this.ClearQueue()
+            this.ClearQueue(id)
             // }, (MusicEnd - MusicStart) * 1000);
         }
     }
@@ -116,11 +121,14 @@ export class Um extends Component {
     }
     DeleteQueue(data, id) {
         // console.log('DeleteQueue')
-        let newdata = this.state.QueuePlaylist.filter((data, idx) => !(id === idx));
-        this.setState({
-            QueuePlaylist: newdata
-        })
-        this.NextQueue(id)
+        // let newdata = this.state.QueuePlaylist.filter((data, idx) => !(id === idx));
+        // this.setState({
+        //     QueuePlaylist: newdata
+        // })
+        setTimeout(() => {
+            this.NextQueue(id)
+        }, 1000);
+
     }
     AddAllQueue() {
         // console.log('AddAllQueue')
