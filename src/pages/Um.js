@@ -203,7 +203,7 @@ export class Um extends Component {
                                         {SearchData.map((data, idx) => (
                                             <div key={data.Key}>
                                                 <Row>
-                                                    <Col md="10" xs="8" onClick={() => this.PlayMusic(data)} style={{ fontSize: '1.5vw' }}>
+                                                    <Col md="10" xs="8" onClick={() => this.PlayMusic(data)} style={{ fontSize: '2vw' }}>
                                                         {data.Band} - {data.MusicName}
                                                     </Col>
                                                     <Col md="2" xs="4">
@@ -226,7 +226,7 @@ export class Um extends Component {
                                         {this.state.QueuePlaylist.map((data, idx) => (
                                             <div key={idx}>
                                                 <Row>
-                                                    <Col md="10" xs="8" style={{ fontSize: '1.2vw' }}>
+                                                    <Col md="10" xs="8" style={{ fontSize: '2vw' }}>
                                                         {data.Band} - {data.MusicName}
                                                     </Col>
                                                     <Col md="2" xs="4">
