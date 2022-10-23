@@ -197,13 +197,13 @@ export class Um extends Component {
                                 bg={'dark'}
                                 text={'white'}>
                                 <Card.Header>Playlist : {this.state.Playlist.length}</Card.Header>
-                                <Card.Body>
+                                <Card.Body >
                                     <div style={{ overflow: 'scroll', height: '50vh' }}>
 
                                         {SearchData.map((data, idx) => (
                                             <div key={data.Key}>
                                                 <Row>
-                                                    <Col md="10" xs="8" onClick={() => this.PlayMusic(data)}>
+                                                    <Col md="10" xs="8" onClick={() => this.PlayMusic(data)} style={{ fontSize: '1.5vw' }}>
                                                         {data.Band} - {data.MusicName}
                                                     </Col>
                                                     <Col md="2" xs="4">
@@ -226,7 +226,7 @@ export class Um extends Component {
                                         {this.state.QueuePlaylist.map((data, idx) => (
                                             <div key={idx}>
                                                 <Row>
-                                                    <Col md="10" xs="8">
+                                                    <Col md="10" xs="8" style={{ fontSize: '1.2vw' }}>
                                                         {data.Band} - {data.MusicName}
                                                     </Col>
                                                     <Col md="2" xs="4">
