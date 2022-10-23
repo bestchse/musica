@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import YouTube from "react-youtube";
 import Playlist from "../datajson/playlist.json";
+import '../App.css';
 
 import { Container, Row, Col, Button, Form, Card } from "react-bootstrap";
 
@@ -203,8 +204,10 @@ export class Um extends Component {
                                         {SearchData.map((data, idx) => (
                                             <div key={data.Key}>
                                                 <Row>
-                                                    <Col md="10" xs="8" onClick={() => this.PlayMusic(data)} style={{ fontSize: '2vw' }}>
-                                                        {data.Band} - {data.MusicName}
+                                                    <Col md="10" xs="8" onClick={() => this.PlayMusic(data)} >
+                                                        <div className="fontscale">
+                                                            {data.Band} - {data.MusicName}
+                                                        </div>
                                                     </Col>
                                                     <Col md="2" xs="4">
                                                         <p onClick={() => this.AddQueue(data)}>+</p>
@@ -226,8 +229,10 @@ export class Um extends Component {
                                         {this.state.QueuePlaylist.map((data, idx) => (
                                             <div key={idx}>
                                                 <Row>
-                                                    <Col md="10" xs="8" style={{ fontSize: '2vw' }}>
-                                                        {data.Band} - {data.MusicName}
+                                                    <Col md="10" xs="8" >
+                                                        <div className="fontscale">
+                                                            {data.Band} - {data.MusicName}
+                                                        </div>
                                                     </Col>
                                                     <Col md="2" xs="4">
                                                         <p onClick={() => this.DeleteQueue(data, idx)}>x</p>

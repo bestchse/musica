@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+@media screen and (min-width: 601px) {
+  div.fontscale {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  div.fontscale {
+    font-size: 10px;
+  }
+}
