@@ -10,19 +10,20 @@ export class Um extends Component {
         super();
         this.state = {
             YoutubePlayer: {
-                VideoId: 'HeraLYDENSI',
+                VideoId: '-wpS87yLcYw',
                 Options: {
                     height: '260',
                     width: '100%',
                     playerVars: {
-                        autoplay: 1,
+                        autoplay: 0,
                         origin: 'http://localhost:3000'
                     }
                 }
             },
             Search: '',
             Playlist: Playlist.Data,
-            QueuePlaylist: []
+            QueuePlaylist: [],
+            Autoplay: false
         }
     }
     onEnd() {
@@ -56,7 +57,7 @@ export class Um extends Component {
                     playerVars: {
                         start: MusicStart,
                         end: MusicEnd,
-                        autoplay: 1,
+                        autoplay: this.state.Autoplay === true ? 1 : 0,
                         origin: 'http://localhost:3000'
                     }
                 }
@@ -82,7 +83,7 @@ export class Um extends Component {
                     playerVars: {
                         start: null,
                         end: null,
-                        autoplay: 1,
+                        autoplay: this.state.Autoplay === true ? 1 : 0,
                         origin: 'http://localhost:3000'
                     }
                 }
@@ -170,15 +171,24 @@ export class Um extends Component {
                     // onPause={this.onPause()}
                     />
                 </Row>
-                <Row md="12" xs="12" style={{ padding: 10, flex: 1, justifyContent: 'center' }}>
-                    <Form.Control
-                        placeholder="Search"
-                        value={this.state.Search}
-                        onChange={(e) => this.setState({ Search: e.target.value })}
-                        type="text"
-                        style={{ textAlign: 'center', width: '50%', backgroundColor: '#181818', color: 'white' }}
-                    />
-                </Row>
+                <Container>
+                    <Row md="12" xs="12" style={{ padding: 10 }}>
+                        <Col md="10" xs="10">
+                            <Form.Control
+                                placeholder="Search"
+                                value={this.state.Search}
+                                onChange={(e) => this.setState({ Search: e.target.value })}
+                                type="text"
+                                style={{ textAlign: 'center', backgroundColor: '#181818', color: 'white', width: '100%' }}
+                            />
+                        </Col>
+                        <Col md="2" xs="2">
+                            <Button active={this.state.Autoplay} variant="outline-secondary" size="sm" onClick={() => this.setState({ Autoplay: !this.state.Autoplay })}>Autoplay</Button>
+                        </Col>
+
+                    </Row>
+                </Container>
+
                 <Container>
                     <Row md="12" xs="8">
                         <Col md="4" xs="4">
