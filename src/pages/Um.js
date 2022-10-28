@@ -134,8 +134,10 @@ export class Um extends Component {
     }
     AddAllQueue() {
         // console.log('AddAllQueue')
+        let ShuffleData = [...this.state.Playlist]
+        ShuffleData = ShuffleData.sort(() => Math.random() - 0.5)
         this.setState({
-            QueuePlaylist: this.state.Playlist
+            QueuePlaylist: ShuffleData
         })
     }
     ClearAllQueue() {
