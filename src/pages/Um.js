@@ -211,7 +211,7 @@ export class Um extends Component {
                             <Card className="text-center"
                                 bg={'dark'}
                                 text={'white'}>
-                                <Card.Header>Playlist : {this.state.Playlist.length}</Card.Header>
+                                <Card.Header>Playlist : {SearchData.length}</Card.Header>
                                 <Card.Body >
                                     <div style={{ overflow: 'scroll', height: '50vh' }}>
                                         {SearchData.map((data, idx) => (
