@@ -16,7 +16,8 @@ export class Um extends Component {
                     width: '100%',
                     playerVars: {
                         autoplay: 0,
-                        origin: 'http://localhost:3000'
+                        // origin: 'http://localhost:3000'
+                        origin: 'https://bestchse.github.io'
                     }
                 }
             },
@@ -58,7 +59,8 @@ export class Um extends Component {
                         start: MusicStart,
                         end: MusicEnd,
                         autoplay: this.state.Autoplay === true ? 1 : 0,
-                        origin: 'http://localhost:3000'
+                        // origin: 'http://localhost:3000'
+                        origin: 'https://bestchse.github.io'
                     }
                 }
             }
@@ -209,7 +211,7 @@ export class Um extends Component {
                             <Card className="text-center"
                                 bg={'dark'}
                                 text={'white'}>
-                                <Card.Header>Playlist : {this.state.Playlist.length}</Card.Header>
+                                <Card.Header>Playlist : {SearchData.length}</Card.Header>
                                 <Card.Body >
                                     <div style={{ overflow: 'scroll', height: '50vh' }}>
                                         {SearchData.map((data, idx) => (
