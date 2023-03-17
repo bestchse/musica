@@ -158,6 +158,9 @@ export class Um extends Component {
             return null
     }
     render() {
+        const current = new Date();
+        const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()} `;
+        const time = current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
         let SearchData = this.state.Playlist.filter(data => {
             return data.MusicName.toLowerCase().includes(this.state.Search.toLowerCase())
         })
@@ -176,6 +179,8 @@ export class Um extends Component {
                     />
                 </Row>
                 <Container>
+                    <div style={{ color: 'white' }}>{date}</div>
+                    <div style={{ color: 'white' }}>{time}</div>
                     <Row md="12" xs="12" style={{ padding: 10 }}>
                         <Col md="10" xs="10">
                             <Form.Control
