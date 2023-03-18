@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Container, Row, Col, Button, Form, Card } from "react-bootstrap";
+
 
 export class TextYoutubeApi extends Component {
 
@@ -135,6 +137,58 @@ export class TextYoutubeApi extends Component {
                         "isChatSponsor": false,
                         "isChatModerator": false
                     }
+                },
+                {
+                    "kind": "youtube#liveChatMessage",
+                    "etag": "V90Ez41TolDdtb4So1ORhCY2F-8",
+                    "id": "LCC.CikqJwoYVUNrRGIxdGxnaFVTZzNsRVZWSmRmbGtBEgtMWDdVWWtoWHVISRI5ChpDTHI1M2FpRTV2MENGVUlfclFZZGRtTUE4QRIbQ0xYSi1mcjk1ZjBDRlMwTXR3QWR1cmdER0Ex",
+                    "snippet": {
+                        "type": "textMessageEvent",
+                        "liveChatId": "KicKGFVDa0RiMXRsZ2hVU2czbEVWVkpkZmxrQRILTFg3VVlraFh1SEk",
+                        "authorChannelId": "UCbGSop3RgOp7MeojJs8sgkQ",
+                        "publishedAt": "2023-03-18T17:46:13.235867+00:00",
+                        "hasDisplayContent": true,
+                        "displayMessage": "yo",
+                        "textMessageDetails": {
+                            "messageText": "yo"
+                        }
+                    },
+                    "authorDetails": {
+                        "channelId": "UCbGSop3RgOp7MeojJs8sgkQ",
+                        "channelUrl": "http://www.youtube.com/channel/UCbGSop3RgOp7MeojJs8sgkQ",
+                        "displayName": "NaNaNa_SaMa",
+                        "profileImageUrl": "https://yt3.ggpht.com/fNXzlBBqFmU8juOq3j09zt-2SMp7ge8lPX24L4747wEp4wSroMBgKzSqLohNmmiAbPyyD6Ho25Y=s88-c-k-c0x00ffffff-no-rj",
+                        "isVerified": false,
+                        "isChatOwner": false,
+                        "isChatSponsor": false,
+                        "isChatModerator": false
+                    }
+                },
+                {
+                    "kind": "youtube#liveChatMessage",
+                    "etag": "p3QD1gDj7SNxMOPOADWtyp572QI",
+                    "id": "LCC.CikqJwoYVUNrRGIxdGxnaFVTZzNsRVZWSmRmbGtBEgtMWDdVWWtoWHVISRI5ChpDSUNkazdHRTV2MENGZWpEd2dRZDhMTUtodxIbQ0xYSi1mcjk1ZjBDRlMwTXR3QWR1cmdER0Ey",
+                    "snippet": {
+                        "type": "textMessageEvent",
+                        "liveChatId": "KicKGFVDa0RiMXRsZ2hVU2czbEVWVkpkZmxrQRILTFg3VVlraFh1SEk",
+                        "authorChannelId": "UCbGSop3RgOp7MeojJs8sgkQ",
+                        "publishedAt": "2023-03-18T17:46:30.883025+00:00",
+                        "hasDisplayContent": true,
+                        "displayMessage": "และนี้คือเสียงจากเด็กวัด",
+                        "textMessageDetails": {
+                            "messageText": "และนี้คือเสียงจากเด็กวัด"
+                        }
+                    },
+                    "authorDetails": {
+                        "channelId": "UCbGSop3RgOp7MeojJs8sgkQ",
+                        "channelUrl": "http://www.youtube.com/channel/UCbGSop3RgOp7MeojJs8sgkQ",
+                        "displayName": "NaNaNa_SaMa",
+                        "profileImageUrl": "https://yt3.ggpht.com/fNXzlBBqFmU8juOq3j09zt-2SMp7ge8lPX24L4747wEp4wSroMBgKzSqLohNmmiAbPyyD6Ho25Y=s88-c-k-c0x00ffffff-no-rj",
+                        "isVerified": false,
+                        "isChatOwner": false,
+                        "isChatSponsor": false,
+                        "isChatModerator": false
+                    }
                 }
             ]
         }
@@ -147,16 +201,20 @@ export class TextYoutubeApi extends Component {
                 {
                     this.state.data.map((data, idx) => (
                         <div key={idx} style={{ marginTop: 10, backgroundColor: 'white' }}>
-                            <div style={{ flexDirection: 'row' }}>
-                                <div>{data.authorDetails.displayName}</div>
-                                <div>{data.snippet.displayMessage}</div>
+                            <div >
+                                <img
+                                    style={{ width: '20px' }}
+                                    src={data.authorDetails.profileImageUrl}
+                                />
+                                <Row style={{ flexDirection: 'row', borderColor: 'red', borderWidth: 2 }}>
+                                    <Col md="2">{data.authorDetails.displayName}</Col>
+                                    <Col md="2">{data.snippet.displayMessage}</Col>
+                                </Row>
+
                             </div>
 
-                            <img
-                                style={{ width: '20px' }}
-                                src={data.authorDetails.profileImageUrl}
-                                alt="new"
-                            />
+
+
                         </div>
                     ))
                 }
